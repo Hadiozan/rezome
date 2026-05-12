@@ -296,27 +296,121 @@
             border-width: 1px; */
             color: #1c4fae !important;
             cursor: pointer;
-            transition: 3s ease-in-out;
+            padding-block: 2px;
         }
         
         .detail:hover{
             color: #0066ff !important;
-            background-color: #1a2a4f;
         }
 
 
+        /* بخش آموزه‌ها و دوره‌ها */
+        .learning-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
 
-        /* .btn-v{
-            background-color: var(--primary-color) ;
-            padding-inline: 50px ;
-            padding-block: 5px;
-            color: var(--white);
-            font-size: 25px;
-            border: none;
+        .learning-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary-color);
+        }
+
+        .learning-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .learning-icon {
+            font-size: 1.8rem;
+        }
+
+        .learning-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #1e2a3e;
+            flex: 1;
+        }
+
+        .learning-hours {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .learning-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .level-badge {
+            background: #e2e8f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #1e2a3e;
+        }
+
+        .level-badge.beginner {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .learning-progress {
+            background: #e2e8f0;
+            border-radius: 20px;
+            height: 8px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #4f8edc45);
+            height: 100%;
+            border-radius: 20px;
+            width: 0% ;
+            transition: width 0.5s ease-in-out;
+
+        }
+
+        .learning-note {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .total-note {
+            background: #eef2ff;
+            padding: 12px 20px;
             border-radius: 15px;
-        } */
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #1e3c72;
+        }
+
+        .learning-card:hover .progress-bar{
+            background: linear-gradient(90deg, var(--primary-color), #4f8fdc);
+            transition: 1s ease;
+        }
+
 
         @media (max-width: 700px) {
+            .progress-bar {
+                background: linear-gradient(90deg, var(--primary-color), #4f8fdc);
+            }
             .navbar {
                 flex-direction: column;
                 text-align: center;
@@ -385,7 +479,8 @@
 
 
         .container section:hover{
-            scale: 1.05;
+            /* -ms-transform-origin-x:100px ; */
+            scale: 1.005;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
     </style>
@@ -398,7 +493,7 @@
         <ul class="nav-links">  <!-- اتصال به بخش های زیر -->
             <li><a href="#intro">معرفی</a></li>
             <li><a href="#experience">پروژه‌ها و فعالیت‌های عملی</a></li>
-            <li><a href="#education">مدارک تحصیلی</a></li>
+            <li><a href="#learning">آموزه‌ها و دوره‌ها</a></li>
             <li><a href="#projects">تجربه‌ها</a></li>
             <li><a href="#contact">تماس با من</a></li> 
         </ul>
@@ -501,11 +596,112 @@
 
 
         <!--  مدارک تحصیلی -->
-        <section id="education">
-            <h2>مدارک تحصیلی</h2>
-            <p><strong>کارشناسی مهندسی کامپیوتر</strong> – دانشگاه آزاد (۱۳۹۶ – ۱۴۰۰)</p>
-            <p><strong>دیپلم ریاضی و فیزیک</strong> – دبیرستان نمونه (۱۳۹۳ – ۱۳۹۶)</p>
-        </section>
+<!-- ===== بخش آموزه‌ها و دوره‌ها ===== -->
+<section id="learning">
+    <h2>📚 آموزه‌ها و دوره‌ها</h2>
+    <p style="margin-bottom: 1.5rem; color: #555;">
+        تمام آموزش‌ها به صورت <strong>خودآموز</strong> و ترکیبی از فیلم‌های یوتیوب، مستندات و پروژه‌های عملی بوده است.
+    </p>
+
+    <!-- پایتون -->
+    <div class="learning-card">
+        <div class="learning-header">
+            <span class="learning-icon">🐍</span>
+            <span class="learning-title">Python</span>
+            <span class="learning-hours">۱۰۰ ساعت</span>
+        </div>
+        <div class="learning-details">
+            <span class="level-badge beginner">متوسط</span>
+            <span class="level-badge">Tkinter</span>
+            <span class="level-badge">Webview</span>
+            <span class="level-badge">Django (مقدماتی)</span>
+        </div>
+        <div class="learning-progress">
+            <div class="progress-bar" style="width: 85%;"></div>
+        </div>
+        <p class="learning-note">✅ پروژه عملی: سیستم مدیریت دانش‌آموزان (اپلیکیشن دسکتاپ)</p>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="learning-card">
+        <div class="learning-header">
+            <span class="learning-icon">💛</span>
+            <span class="learning-title">JavaScript</span>
+            <span class="learning-hours">۴۵ ساعت</span>
+        </div>
+        <div class="learning-details">
+            <span class="level-badge beginner">متوسط رو به پایین</span>
+            <span class="level-badge">ES6+</span>
+            <span class="level-badge">DOM</span>
+            <span class="level-badge">رویدادها</span>
+        </div>
+        <div class="learning-progress">
+            <div class="progress-bar" style="width: 60%;"></div>
+        </div>
+        <p class="learning-note">📌 در حال یادگیری فعال و ساخت پروژه‌های تعاملی</p>
+    </div>
+
+    <!-- HTML & CSS -->
+    <div class="learning-card">
+        <div class="learning-header">
+            <span class="learning-icon">🎨</span>
+            <span class="learning-title">HTML & CSS</span>
+            <span class="learning-hours">۳۰ ساعت</span>
+        </div>
+        <div class="learning-details">
+            <span class="level-badge beginner">خوب</span>
+            <span class="level-badge">ساختاردهی</span>
+            <span class="level-badge">ریسپانسیو</span>
+            <span class="level-badge">فرم‌ها</span>
+        </div>
+        <div class="learning-progress">
+            <div class="progress-bar" style="width: 80%;"></div>
+        </div>
+        <p class="learning-note">✅ طراحی چندین پروژه شخصی و همین رزومه تعاملی</p>
+    </div>
+
+    <!-- Sass, Tailwind, Flexbox, Grid -->
+    <div class="learning-card">
+        <div class="learning-header" >
+            <span class="learning-icon">⚡</span>
+            <span class="learning-title">Sass · Tailwind · Flexbox · Grid</span><br>
+            <span class="learning-hours">۵۰ ساعت</span>
+        </div>
+        <div class="learning-details">
+            <span class="level-badge beginner">خوب</span>
+            <span class="level-badge">Sass</span>
+            <span class="level-badge">Tailwind</span>
+            <span class="level-badge">Flex/Grid</span>
+        </div>
+        <div class="learning-progress">
+            <div class="progress-bar" style="width: 75%;"></div>
+        </div>
+        <p class="learning-note">🎯 علاقه خاص به طراحی مدرن و چیدمان‌های پیچیده</p>
+    </div>
+
+    <!-- گیت و گیت‌هاب -->
+    <div class="learning-card">
+        <div class="learning-header">
+            <span class="learning-icon">📦</span>
+            <span class="learning-title">Git & GitHub</span>
+            <span class="learning-hours">۵ ساعت</span>
+        </div>
+        <div class="learning-details">
+            <span class="level-badge beginner">مقدماتی</span>
+            <span class="level-badge">clone</span>
+            <span class="level-badge">commit</span>
+            <span class="level-badge">push</span>
+        </div>
+        <div class="learning-progress">
+            <div class="progress-bar" style="width: 30%;"></div>
+        </div>
+        <p class="learning-note">📚 در حال یادگیری برای همکاری تیمی حرفه‌ای</p>
+    </div>
+
+    <div class="total-note">
+        ⏱️ <strong>مجموع ساعت‌های آموزش و تمرین:</strong> حدود ۲۳۰ ساعت (خودآموز و پروژه‌محور)
+    </div>
+</section>  
 
         <!-- بخش تجربه‌ها -->
         <section id="projects">
