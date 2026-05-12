@@ -17,22 +17,42 @@
                 linear-gradient(0deg, #00ff0a);
             --navbar-bg: linear-gradient(135deg, #ff0000, #2a3a6a);
         }
-        
+        /* ---------------------------- */
+        /* هاله دور ناوبار هنگام هاور */
+        .navbar {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
 
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
+                        rgba(255, 255, 255, 0.25) 0%, 
+                        rgba(255, 255, 255, 0.05) 20%, 
+                        rgba(255, 255, 255, 0) 40%,
+                        transparent 70%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-.navbar {
-    background: var(--navbar-bg);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    
-}
+        .navbar:hover::before {
+            opacity: 1;
+        }
+
+        /* حرکت هاله با موس داخل ناوبار */
+        .navbar {
+            cursor: default;
+        }
+
+   
 
 
 
@@ -41,6 +61,19 @@
             padding: 0;
             box-sizing: border-box;
             /* user-select: none; */
+        }
+        .navbar {
+            background: var(--navbar-bg);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            
         }
 
         body {
@@ -416,7 +449,7 @@
             <div class="experience" style="margin-bottom: 2rem;">
                 <h3 style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
                     <span>📘 سیستم مدیریت دانش‌آموزان</span>
-                    <span class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | Python, Tkinter</span>
+                    <a href="#" class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | Python, Tkinter</a>
                 </h3>
                 <ul style="margin-top: 0.5rem;">
                     <li>طراحی و پیاده‌سازی صفحات <strong>لاگین، ثبت‌نام، پنل مدیریت دبیر، پنل دانش‌آموز، بازیابی رمز و لیست‌ها</strong></li>
@@ -429,14 +462,13 @@
             <div class="experience" style="margin-bottom: 2rem;">
                 <h3 style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
                     <span>🍽️ صفحه منوی دیجیتال رستوران</span>
-                    <a class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | HTML, CSS</a>
+                    <a href="#" class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | HTML, CSS</a>
                 </h3>
                 <ul style="margin-top: 0.5rem;">
                     <li>طراحی یک صفحه <strong>ساده، تمیز و ریسپانسیو</strong> برای نمایش منوی رستوران</li>
                     <li>آشنایی اولیه با <strong>چیدمان منو و اولویت‌بندی اطلاعات</strong> برای کاربر نهایی</li>
                     <li>بهبود مهارت در <strong>Flexbox و طراحی بدون فریمورک</strong></li>
                 </ul>
-                <button class="btn-v">نمایش عکس های پروژه</button>
             </div>
 
             <!-- پروژه ۳: همکاری گروهی (فرانت‌اند) -->
@@ -530,7 +562,17 @@
             });
         });
 
-
+        // هاله متحرک روی ناوبار
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            this.style.setProperty('--x', x + '%');
+            this.style.setProperty('--y', y + '%');
+        });
+    }
     </script>
 </body>
 </html>
