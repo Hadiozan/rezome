@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>رزومه هادی اوزن</title>
+    <link rel="stylesheet" href="s.css">
+    <style>
+        :root {
+            --primary-color: #1e3c72; 
+            --primary-dark: #2c3e66;
+            --hover-color: #ffaa44;         
+            --white: #fbfbfb ;          
+            --multi-gradient: linear-gradient(45deg, rgb(47 30 114), rgb(63 255 0 / 80%)),
+                radial-gradient(circle at 20% 80%, rgba(93, 109, 255, 0), transparent 70%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.02)),
+                linear-gradient(0deg, #00ff0a);
+            --navbar-bg: linear-gradient(135deg, #ff0000, #2a3a6a);
+        }
+        
+
+
+.navbar {
+    background: var(--navbar-bg);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* user-select: none; */
+        }
+
+        body {
+            font-family: 'iransans','sahel','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #e7e7e7;
+        }
+
+        /* ===== نوار بالایی رنگی ===== */
+        /* .navbar {
+            background: var(--multi-gradient), #0066ff;  
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            animation: pulse 1s infinite;
+        } */
+
+        
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        /* محتوای اصلی */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+    
+
+        .container:hover section{
+            opacity: 0.7    ;
+        }
+        .container:hover section:hover{
+            opacity: 1;
+        }
+        
+  
+        section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            scroll-margin-top: 100px;
+            transition: ease-in-out 100ms;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-right: 5px solid var(--primary-color);
+            padding-right: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            margin: 1rem 0 0.5rem;
+        }
+
+        /* بخش تماس با من - استایل مخصوص */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-card {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0 15px 0 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1px 2px 0.5px #00000030;
+        }
+
+        .contact-card:hover body{
+            opacity: 0.5;
+        }
+
+
+        .contact-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card .label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-card .value {
+            color: #555;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* فرم تماس ساده */
+        .contact-form {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .alert {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+        /* ریسپانسیوتی */
+
+        .items p{
+            border-bottom: dashed;
+            padding-bottom: 25px;
+            border-color: #55555513;
+        }
+        .detail{
+            /* border-bottom: solid ;
+            border-width: 1px; */
+            color: #1c4fae !important;
+            cursor: pointer;
+            transition: 3s ease-in-out;
+        }
+        
+        .detail:hover{
+            color: #0066ff !important;
+            background-color: #1a2a4f;
+        }
+
+
+
+        /* .btn-v{
+            background-color: var(--primary-color) ;
+            padding-inline: 50px ;
+            padding-block: 5px;
+            color: var(--white);
+            font-size: 25px;
+            border: none;
+            border-radius: 15px;
+        } */
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+            .nav-links {
+                gap: 1rem;
+                justify-content: center;
+                
+            }
+            .nav-links li{
+                background-color: rgba(187, 187, 187, 0.1);
+                padding: 5px 10px;
+                border-radius:10px ;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            section {
+                padding: 1.2rem;
+            }
+            .contact-info {
+                flex-direction: column;
+            }
+            #experience div{
+                border-bottom: dashed;
+                padding-bottom: 25px;
+                border-color: #55555513;
+            }
+            .experience li , 
+            .experience span{
+                margin-top:10px ;
+                /* margin-left: 10px; */
+            }
+            .detail{
+                padding-inline: 10px;
+                border-radius: 10px ;
+                background-color: #33333323;
+            }
+
+        }
+
+        /* استایل چاپ */
+        @media print {
+            .navbar {
+                position: static;
+                background-color: #eee !important;
+                color: black;
+            }
+            .logo, .nav-links a {
+                color: black;
+            }
+            .contact-form {
+                display: none;
+            }
+            body {
+                background: var(--white);
+            }
+            section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+        }
+
+
+        .container section:hover{
+            scale: 1.05;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!--  هدر اصلی  -->
+    <div class="navbar">
+        <div class="logo">هادی اوزن</div>
+        <ul class="nav-links">  <!-- اتصال به بخش های زیر -->
+            <li><a href="#intro">معرفی</a></li>
+            <li><a href="#experience">پروژه‌ها و فعالیت‌های عملی</a></li>
+            <li><a href="#education">مدارک تحصیلی</a></li>
+            <li><a href="#projects">تجربه‌ها</a></li>
+            <li><a href="#contact">تماس با من</a></li> 
+        </ul>
+    </div>
+
+    <div class="container">
+        <!--  معرفی -->
+    <section id="intro">
+        <h2>خلاصه ای درباره من </h2>
+        <div class="items" style="line-height: 1.8;">
+            <p style="font-size: 1.1rem; font-weight: bold; color: #1e3c72;">
+                ▸ توسعه‌دهنده فرانت‌اند در سطح مبتدی (Junior) با ۳ سال تجربه یادگیری مداوم
+            </p>
+            <br>
+            <p>
+                <strong>پایه فنی قوی در HTML، CSS و آشنایی عمیق با CSS Grid، Flexbox و Tailwind</strong> داشته و 
+                با <strong>JavaScript در سطح متوسط (۶/۱۰)</strong> پروژه‌های کوچک تعاملی مثل صفحات لاگین طراحی کرده‌ام. 
+                سرعت یادگیری فوق‌العاده بالا و تمرکز بر جزئیات، از نقاط قوت اصلی من است.
+            </p>
+            <br>
+            <p>
+                با <strong>Sass، Git/GitHub (امتیاز ۷/۱۰)</strong> و آشنایی مقدماتی با React (در حال یادگیری فعال) 
+                توانایی همکاری در پروژه‌های مدرن را دارم. همچنین <strong>علاقه زیادی به UI</strong> دارم و 
+                در کنار فرانت‌اند، با پایتون و کتابخانه‌های Tkinter، Webview آشنایی دارم.
+            </p>
+            <br>
+            <p style="border-bottom: none;">
+                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
+                    💡 روحیه تیمی قوی
+                </span>، 
+                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
+                    🚀 یادگیری سریع
+                </span> و 
+                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
+                    🎯 تمرکز بر جزئیات
+                </span> 
+                - آماده برای شروع کارآموزی یا موقعیت Junior Frontend Developer
+            </p>
+        </div>
+    </section>
+
+
+        <!--  سابقه شغلی -->
+        <section id="experience">
+            <h2>پروژه‌ها و تجربیات عملی</h2>
+
+            <!-- پروژه ۱: سیستم مدیریت دانش‌آموزی (مهم‌ترین) -->
+            <div class="experience" style="margin-bottom: 2rem;">
+                <h3 style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                    <span>📘 سیستم مدیریت دانش‌آموزان</span>
+                    <span class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | Python, Tkinter</span>
+                </h3>
+                <ul style="margin-top: 0.5rem;">
+                    <li>طراحی و پیاده‌سازی صفحات <strong>لاگین، ثبت‌نام، پنل مدیریت دبیر، پنل دانش‌آموز، بازیابی رمز و لیست‌ها</strong></li>
+                    <li>تمرکز بر <strong>تجربه کاربری ساده</strong> و ساختار ماژولار برای توسعه آتی</li>
+                    <li>نمایش توانایی در <strong>توسعه اپلیکیشن دسکتاپ</strong> بدون فریمورک سنگین</li>
+                </ul>
+            </div>
+
+            <!-- پروژه ۲: منوی دیجیتال رستوران (HTML/CSS) -->
+            <div class="experience" style="margin-bottom: 2rem;">
+                <h3 style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                    <span>🍽️ صفحه منوی دیجیتال رستوران</span>
+                    <a class="detail" style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">پروژه شخصی | HTML, CSS</a>
+                </h3>
+                <ul style="margin-top: 0.5rem;">
+                    <li>طراحی یک صفحه <strong>ساده، تمیز و ریسپانسیو</strong> برای نمایش منوی رستوران</li>
+                    <li>آشنایی اولیه با <strong>چیدمان منو و اولویت‌بندی اطلاعات</strong> برای کاربر نهایی</li>
+                    <li>بهبود مهارت در <strong>Flexbox و طراحی بدون فریمورک</strong></li>
+                </ul>
+                <button class="btn-v">نمایش عکس های پروژه</button>
+            </div>
+
+            <!-- پروژه ۳: همکاری گروهی (فرانت‌اند) -->
+            <div class="experience" style="margin-bottom: 2rem;">
+                <h3 style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                    <span>👥 همکاری گروهی – توسعه رابط گرافیکی</span>
+                    <a href="#"  class="detail"  style="font-size: 0.85rem; font-weight: normal; color: #2c3e66;">HTML, CSS, JS | Python, Tkinter</a>
+                </h3>
+                <ul style="margin-top: 0.5rem;">
+                    <li>نقش <strong>توسعه‌دهنده بخش گرافیکی و فرانت‌اند</strong> در ۲ پروژه گروهی کوچک</li>
+                    <li>حل چالش‌های <strong>ریسپانسیو در نمایشگرهای خاص</strong> و بهبود تجربه کاربری</li>
+                    <li>همکاری مستقیم از طریق اشتراک فایل (بدون ابزار آنلاین به دلیل محدودیت‌های منطقه)</li>
+                    <li>توانایی <strong>کار تیمی، تعامل مؤثر و تحویل بخش‌های تمیز و قابل استفاده</strong></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 0.3rem;">
+                    📌 پروژه‌های گروهی به دلایل خارج از کنترل فنی (نبود هدفمندی در تیم / در مرحله تحقیق و توسعه) به پایان نرسیدند، 
+                    اما <strong>توانایی فنی و همکاری گروهی</strong> در آن‌ها به اثبات رسید.
+                </p>
+            </div>
+
+            <!-- جمع‌بندی مهارت‌های عملی -->
+            <div class="experience" style="background: #f0f4fa; padding: 1rem; border-radius: 15px; margin-top: 1rem;border-bottom: none;">
+                <p style="margin: 0; font-weight: bold;">⚡ مهارت‌های به‌کاررفته در پروژه‌ها:</p>
+                <p style="margin: 0.5rem 0 0 0;">
+                    HTML5, CSS3, JavaScript, Tailwind, Python, Tkinter, Webview, 
+                    مدیریت ریسپانسیو، کار گروهی، حل مسئله در طراحی UI
+                </p>
+            </div>
+        </section>
+
+
+        <!--  مدارک تحصیلی -->
+        <section id="education">
+            <h2>مدارک تحصیلی</h2>
+            <p><strong>کارشناسی مهندسی کامپیوتر</strong> – دانشگاه آزاد (۱۳۹۶ – ۱۴۰۰)</p>
+            <p><strong>دیپلم ریاضی و فیزیک</strong> – دبیرستان نمونه (۱۳۹۳ – ۱۳۹۶)</p>
+        </section>
+
+        <!-- بخش تجربه‌ها -->
+        <section id="projects">
+            <h2>تجربه‌ها</h2>
+            <ul>
+                <li>طراحی رزومه تعاملی با HTML, CSS</li>
+                <li>ساخت یک داشبورد مدیریت ساده با React</li>
+                <li>بهبود سرعت بارگذاری یک وبسایت فروشگاهی</li>
+            </ul>
+        </section>
+
+        <!-- ===== بخش تماس با من (جدید) ===== -->
+        <section id="contact">
+            <h2>تماس با من</h2>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="icon">📧</div>
+                    <div class="label">ایمیل</div>
+                    <div class="value"><a href="mailto:hadiozan130@gmail.com">hadiozan130@gmail.com</a></div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="icon">📱</div>
+                    <div class="label">تلفن</div>
+                    <div class="value"><a href="tel:+989123456789">09938892920</a></div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="icon">🪪</div>
+                    <div class="label">مشاهده رزومه متداول</div>
+                    <div class="value"><a href="https://my.files.ir/drive/s/9yTeutKgbbd98oUuRlG5rY8AItDnbT" target="_blank">https://my.file...</a></div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="icon">🐙</div>
+                    <div class="label">گیت‌هاب</div>
+                    <div class="value"><a href="#" target="_blank">github.com/hadiozan</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // اسکرول نرم
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+
+    </script>
+</body>
+</html>
