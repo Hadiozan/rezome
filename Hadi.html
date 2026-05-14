@@ -15,7 +15,8 @@
                 radial-gradient(circle at 20% 80%, rgba(93, 109, 255, 0), transparent 70%),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.02)),
                 linear-gradient(0deg, #00ff0a);
-            --navbar-bg: linear-gradient(135deg, #ff0000, #2a3a6a);
+            --navbar-bg: linear-gradient(135deg, #606060e2, #2a3a6a) , linear-gradient(#000000 , #00000000);
+            /* --navbar-bg: linear-gradient(90deg , #1e3b72a2,#4169E1); */
         }
         /* ---------------------------- */
         /* هاله دور ناوبار هنگام هاور */
@@ -83,22 +84,54 @@
             background: #e7e7e7;
         }
 
-        /* ===== نوار بالایی رنگی ===== */
-        /* .navbar {
-            background: var(--multi-gradient), #0066ff;  
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            animation: pulse 1s infinite;
-        } */
-
+/* ===== دکمه برگشت به بالا ===== */
+    .back-to-top {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;   /* چون سایت راست‌چین است، در گوشه پایین چپ */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        /* background: var(--primary-color, #1e3c72); */
+        background: radial-gradient(circle ,#000000  , #00000078 ,#00000000);
+        color: white;
+        border: none;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
+    }
+
+    .back-to-top:hover {
+        background: var(--hover-color, #ffaa44);
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+    .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* در موبایل کمی کوچک‌تر */
+    @media (max-width: 700px) {
+        .back-to-top {
+            width: 44px;
+            height: 44px;
+            font-size: 24px;
+            bottom: 15px;
+            right: 15px !important;
+            bottom:  15px !important;
+        }
+    }
         .logo {
             color: var(--white);
             font-size: 1.5rem;
@@ -466,11 +499,13 @@
             transition: all 0.2s ease;
             margin-top: 10px;
             width: fit-content;
+            border-right: 1px solid black;
         }
 
         .project-btn:hover {
             background: var(--primary-color);
-            transform: scale(1.02);
+            transform: scale(1.02); 
+            /* transform: matrix(100px); */
         }
 
         .skills-summary {
@@ -531,7 +566,7 @@
         }
 
 
-
+        /* برای اینکه محتوای نوار زیر هاله قرار نگیرد (اختیاری) */
         /* ---------------------------------------------- */
         /* ---------------------------------------------- */
         /* ---------------------------------------------- */
@@ -540,8 +575,8 @@
 .hamburger {
     display: none;
     flex-direction: column;
-    justify-content: center;  
-    gap: 6px;              
+    justify-content: center;  /* changed from space-between */
+    gap: 6px;                 /* اضافه شد - فاصله بین خطوط */
     background: none;
     border: none;
     cursor: pointer;
@@ -560,7 +595,8 @@
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
-/* انمیشن های بخش منو همبرگری */
+
+/* تبدیل به ضربدر - با ارتفاع 40px و gap 6px */
 .hamburger.active .bar:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -596,7 +632,7 @@
             transform: translateY(-2px);
         }
 
-        /* منوی موبایل  */
+        /* منوی موبایل - مخفی در حالت عادی */
         .mobile-menu {
             display: none;
             list-style: none;
@@ -642,7 +678,13 @@
         .mobile-menu.show {
             display: flex;
         }
-        
+
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+
+
+
 
         /* ===== موبایل ===== */
         @media (max-width: 700px) {
@@ -885,7 +927,9 @@
                 <li>✅ چیدمان حرفه‌ای منو با اولویت‌بندی اطلاعات</li>
                 <li>✅ تمرین عملی Flexbox و طراحی بدون فریمورک</li>
             </ul>
-            <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
+            <div class="box">
+                <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
+            </div>
         </div>
 
         <!-- پروژه ۳: همکاری گروهی فرانت‌اند -->
@@ -1057,7 +1101,7 @@
                 <div class="contact-card">
                     <div class="icon">📱</div>
                     <div class="label">تلفن</div>
-                    <div class="value"><a href="tel:+989123456789">09938892920</a></div>
+                    <div class="value"><a href="tel:+989938892920">09938892920</a></div>
                 </div>
                 
                 <div class="contact-card">
@@ -1073,7 +1117,16 @@
                 </div>
             </div>
         </section>
+        
     </div>
+<!-- دکمه برگشت به بالا -->
+<button id="backToTop" class="back-to-top" aria-label="برگشت به بالا">
+    ↑
+</button>
+
+
+</body>
+
 
 <script>
     // -----------------------------------------------
@@ -1140,6 +1193,27 @@
             this.style.setProperty('--y', y + '%');
         });
     }
+    // دکمه برگشت به بالا
+    const backToTopBtn = document.getElementById('backToTop');
+
+    if (backToTopBtn) {
+        // نمایش یا مخفی کردن دکمه بر اساس اسکرول
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        // رفتن به بالا با کلیک
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 </script>
-</body>
+
 </html>
