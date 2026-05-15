@@ -15,7 +15,7 @@
                 radial-gradient(circle at 20% 80%, rgba(93, 109, 255, 0), transparent 70%),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.02)),
                 linear-gradient(0deg, #00ff0a);
-            --navbar-bg: linear-gradient(135deg, #606060e2, #2a3a6a) , linear-gradient(#000000 , #00000000);
+            --navbar-bg: linear-gradient(90deg, #60606069, #162e75e0) , linear-gradient(#00000071 , #00000000);
             /* --navbar-bg: linear-gradient(90deg , #1e3b72a2,#4169E1); */
         }
         /* ---------------------------- */
@@ -64,7 +64,8 @@
             /* user-select: none; */
         }
         .navbar {
-            background: var(--navbar-bg);
+            background:var(--navbar-bg) ;
+            backdrop-filter: blur(15px) !important;
             padding: 1rem 2rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: sticky;
@@ -672,6 +673,7 @@
 
         .mobile-menu a:hover {
             background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
         }
 
         /* نمایش منوی موبایل وقتی کلاس show دارد */
@@ -679,8 +681,148 @@
             display: flex;
         }
 
+/* ----------------------------------------------------------------------- */
+/* ---------------------------  بخش معرفی ----------------------------------- */
+/* ----------------------------------------------------------------------- */
+
+/* ===== بخش معرفی (بازطراحی) ===== */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+
+}
+
+.intro-text {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.intro-badge {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.intro-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.intro-desc strong {
+    color: var(--primary-color);
+}
+
+.intro-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 1px solid #eef2f6;
+    transition: all 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateX(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.feature-emoji {
+    font-size: 2rem;
+}
+
+.feature-title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #1e2a3e;
+    min-width: 100px;
+}
+
+.feature-desc {
+    font-size: 0.8rem;
+    color: #5a6e8a;
+}
+
+.intro-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0.5rem;
+    padding-top : 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.intro-skills span {
+    background: #eef2ff;
+    color: #1e3c72;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.intro-skills span:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.02);
+}
+
+/* ریسپانسیو */
+@media (max-width: 750px) {
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 0.8rem 1rem;
+    }
+    
+    .feature-emoji {
+        font-size: 1.6rem;
+    }
+    
+    .feature-title {
+        min-width: auto;
+        font-size: 0.9rem;
+    }
+    
+    .feature-desc {
+        font-size: 0.7rem;
+    }
+}
+
+
+
+
+
+        
 /* ---------------------------------------- */
-/* ---------------------------------------- */
+/* ------------------ریسپانسو---------------------- */
 /* ---------------------------------------- */
 
 
@@ -802,7 +944,14 @@
             }
             
         }
-
+        .intro-text2{
+            background: var(--primary-color);
+            border-inline: 60px transparent solid;
+            text-align: center;
+            border-radius: 12px;
+            width: auto;
+            padding: 6px 0px;
+        }
 
         .container section:hover{
             /* -ms-transform-origin-x:100px ; */
@@ -846,36 +995,41 @@
     <div class="container">
         <!--  معرفی -->
     <section id="intro">
-        <h2>خلاصه ای درباره من </h2>
-        <div class="items" style="line-height: 1.8;">
-            <p style="font-size: 1.1rem; font-weight: bold; color: #1e3c72;">
-                ▸ توسعه‌دهنده فرانت‌اند در سطح مبتدی (Junior) با ۳ سال تجربه یادگیری مداوم
-            </p>
-            <br>
-            <p>
-                <strong>پایه فنی قوی در HTML، CSS و آشنایی عمیق با CSS Grid، Flexbox و Tailwind</strong> داشته و 
-                با <strong>JavaScript در سطح متوسط (۶/۱۰)</strong> پروژه‌های کوچک تعاملی مثل صفحات لاگین طراحی کرده‌ام. 
-                سرعت یادگیری فوق‌العاده بالا و تمرکز بر جزئیات، از نقاط قوت اصلی من است.
-            </p>
-            <br>
-            <p>
-                با <strong>Sass، Git/GitHub (امتیاز ۷/۱۰)</strong> و آشنایی مقدماتی با React (در حال یادگیری فعال) 
-                توانایی همکاری در پروژه‌های مدرن را دارم. همچنین <strong>علاقه زیادی به UI</strong> دارم و 
-                در کنار فرانت‌اند، با پایتون و کتابخانه‌های Tkinter، Webview آشنایی دارم.
-            </p>
-            <br>
-            <p style="border-bottom: none;">
-                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
-                    💡 روحیه تیمی قوی
-                </span>، 
-                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
-                    🚀 یادگیری سریع
-                </span> و 
-                <span style=" white-space: nowrap;margin-top: 5px; background-color: #ffaa44; padding: 2px 8px; border-radius: 20px; font-weight: bold;">
-                    🎯 تمرکز بر جزئیات
-                </span> 
-                - آماده برای شروع کارآموزی یا موقعیت Junior Frontend Developer
-            </p>
+    <h2 id="say-hi">👋 سلام ، من هادی هستم</h2>
+        
+        <div class="intro-grid">
+            <!-- سمت راست: معرفی کوتاه -->
+            <div class="intro-text">
+                <p class="intro-badge">✨ توسعه‌دهنده فرانت‌اند (Junior) |  سه سال یادگیری مداوم   </p>
+                <p class="intro-desc" style="margin-bottom: 0px;">
+                <strong>:)</strong> پایه فنی قوی در <strong>HTML، CSS، JavaScript</strong> و آشنایی عمیق با 
+                    <strong>Tailwind، Sass، Flexbox و Grid</strong>. 
+                </p>
+                <p style="color: black; "> <strong>:)</strong>  با توانایی تولید و توسعه  <strong>اپ دسکتاپ </strong>با <strong>Python و Tkinter</strong></p>
+                <p class="intro-desc">
+                <strong >:)</strong> آماده برای <strong>کارآموزی یا موقعیت Junior Frontend Developer</strong>
+                    با روحیه تیمی عالی و سرعت یادگیری بالا.
+                </p>
+            </div>
+
+            <!-- سمت چپ: سه ویژگی کلیدی به صورت کارت -->
+            <div class="intro-features">
+                <div class="feature-card">
+                    <span class="feature-emoji">💡</span>
+                    <span class="feature-title">روحیه تیمی قوی</span>
+                    <span class="feature-desc">همکاری مؤثر و تعامل حرفه‌ای</span>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">🚀</span>
+                    <span class="feature-title">یادگیری سریع</span>
+                    <span class="feature-desc">تسلط بر تکنولوژی‌های جدید در کمترین زمان</span>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">🎯</span>
+                    <span class="feature-title">تمرکز بر جزئیات</span>
+                    <span class="feature-desc">طراحی تمیز و تجربه کاربری روان</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -956,7 +1110,7 @@
     </div>
 
     <!-- جمع‌بندی مهارت‌ها -->
-    <div class="skills-summary">
+    <div class="skills-summary" style="user-select: none;">
         <span class="skill-pill">HTML5</span>
         <span class="skill-pill">CSS3</span>
         <span class="skill-pill">JavaScript</span>
@@ -1101,7 +1255,7 @@
                 <div class="contact-card">
                     <div class="icon">📱</div>
                     <div class="label">تلفن</div>
-                    <div class="value"><a href="tel:+989938892920">09938892920</a></div>
+                    <div class="value"><a href="tel:+98993.....20">0993......20</a></div>
                 </div>
                 
                 <div class="contact-card">
@@ -1129,6 +1283,32 @@
 
 
 <script>
+
+    const say_hi = document.querySelector('.intro-badge')
+    
+
+    const max_w = window.matchMedia("(max-width: 460px)");
+
+
+
+    function go(e){
+        if (e.matches){
+            say_hi.innerHTML=('✨ توسعه‌دهنده فرانت‌اند Junior <br>🎓  سه سال یادگیری مداوم  ')
+            say_hi.classList.toggle('intro-text2')
+            
+        }else{
+        say_hi.innerHTML=('✨ توسعه‌دهنده فرانت‌اند Junior |  سه سال یادگیری مداوم  ')         
+        say_hi.classList.remove('intro-text2')    
+      }
+    } 
+
+
+
+    max_w.addEventListener('change' , go);
+
+    go(max_w);
+
+
     // -----------------------------------------------
     // منوی همبرگری - با انیمیشن ضربدر
     const hamburgerBtn = document.getElementById('hamburgerBtn');
