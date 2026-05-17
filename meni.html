@@ -6,12 +6,6 @@
     <title>رزومه هادی اوزن</title>
     <link rel="stylesheet" href="s.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* user-select: none; */
-        }
         :root {
             --primary-color: #1e3c72; 
             --primary-dark: #2c3e66;
@@ -22,7 +16,8 @@
                 linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.02)),
                 linear-gradient(0deg, #00ff0a);
             --navbar-bg: linear-gradient(90deg, #60606069, #162e75e0) , linear-gradient(#00000071 , #00000000);
-            /* --navbar-bg: linear-gradient(90deg , #1e3b72a2,#4169E1); */
+            
+            
         }
         /* ---------------------------- */
         /* هاله دور ناوبار هنگام هاور */
@@ -63,7 +58,12 @@
 
 
 
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* user-select: none; */
+        }
         .navbar {
             background:var(--navbar-bg) ;
             backdrop-filter: blur(15px) !important;
@@ -76,7 +76,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            
+            justify-content: space-around;
         }
 
         body {
@@ -164,18 +164,18 @@
 
         /* محتوای اصلی */
         .container {
-            max-width: 1100px;
+            max-width: 1500px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
     
 
-        .container:hover section{
+        /* .container:hover section{
             opacity: 0.7    ;
-        }
-        .container:hover section:hover{
+        } */
+        /* .container:hover section:hover{
             opacity: 1;
-        }
+        } */
         
   
         section {
@@ -185,7 +185,7 @@
             margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             scroll-margin-top: 100px;
-            transition: ease-in-out 100ms;
+            transition: ease-in-out 0.2s;
         }
 
         h2 {
@@ -213,15 +213,19 @@
             min-width: 200px;
             background: #f8f9fa;
             padding: 1rem;
-            border-radius: 0 15px 0 15px;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease-in-out;
             
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 1px 2px 0.5px var(--primary-color);
+            /* transform: translateY(-5px); */
+            box-shadow: 0 0px 7px 0px #000;
+            /* border: 1px black solid; */
+            border-radius: 15px;
+            background: radial-gradient(circle at 20% 80%, rgba(93, 109, 255, 0.22), #00000036 70%);
+            backdrop-filter: blur(2px);
         }
 
         .contact-card:hover body{
@@ -746,9 +750,11 @@
 }
 
 .feature-card:hover {
-    transform: translateX(-5px);
-    border-color: var(--primary-color);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+transform: translateX(-3px);
+  border-right: 4px solid var(--primary-color);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--primary-color);
+    background: #9d99ff4a;
 }
 
 .feature-emoji {
@@ -819,7 +825,11 @@
 
 
 
-
+    .buttem-border{
+        margin-bottom: 0px;
+    border-bottom: #0000005b dashed 1px;
+    padding-bottom: 6px;
+    }
 
         
 /* ---------------------------------------- */
@@ -870,6 +880,14 @@
         /* _______________________________________________ */
 
         @media (max-width: 700px) {
+        .intro-text-chenges p:nth-child(-n+3):nth-child(n+2) {
+            border-bottom: 1px dashed #00000030;
+            padding-bottom: 8px;
+
+        }
+            .mini-font-x1{
+                font-size: 13px;
+            }
             .projects-grid {
                 grid-template-columns: 1fr;
             }
@@ -956,8 +974,9 @@
 
         .container section:hover{
             /* -ms-transform-origin-x:100px ; */
-            scale: 1.005;
+            /* scale: 1.005; */
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -1000,14 +1019,14 @@
         
         <div class="intro-grid">
             <!-- سمت راست: معرفی کوتاه -->
-            <div class="intro-text">
-                <p class="intro-badge">✨ توسعه‌دهنده فرانت‌اند (Junior) |  سه سال یادگیری مداوم   </p>
-                <p class="intro-desc" style="margin-bottom: 0px;border-bottom: #0000005b dashed 1px; padding-bottom:6px ;">
+            <div class="intro-text intro-text-chenges">
+                <p class="intro-badge ">✨ توسعه‌دهنده فرانت‌اند (Junior) |  سه سال یادگیری مداوم   </p>
+                <p class="intro-desc mini-font-x1 buttem-border" style="margin-bottom: 0px;">
                 <strong>:)</strong> پایه فنی قوی در <strong>HTML، CSS، JavaScript</strong> و آشنایی عمیق با 
                     <strong>Tailwind، Sass، Flexbox و Grid</strong>. 
                 </p>
-                <p style="color: black; border-bottom: #0000005b dashed 1px; padding-bottom:9px ;"> <strong>:)</strong>  با توانایی تولید و توسعه  <strong>اپ دسکتاپ </strong>با <strong>Python و Tkinter</strong></p>
-                <p class="intro-desc">
+                <p class="mini-font-x1 buttem-border" style="color: black; padding-bottom: 9px;" > <strong>:)</strong>  با توانایی تولید و توسعه  <strong>اپ دسکتاپ </strong>با <strong>Python و Tkinter</strong></p>
+                <p class="intro-desc mini-font-x1" >
                 <strong >:)</strong> آماده برای <strong>کارآموزی یا موقعیت Junior Frontend Developer</strong>
                     با روحیه تیمی عالی و سرعت یادگیری بالا.
                 </p>
@@ -1126,9 +1145,9 @@
 
         <!--  مدارک تحصیلی -->
 <!-- ===== بخش آموزه‌ها و دوره‌ها ===== -->
-<section id="learning">
+<section id="learning" >
     <h2>📚 آموزه‌ها و دوره‌ها</h2>
-    <p style="margin-bottom: 1.5rem; color: #555;">
+    <p style="margin-bottom: 1.5rem; color: #555;" class="mini-font-x1">
         تمام آموزش‌ها به صورت <strong>خودآموز</strong> و ترکیبی از فیلم‌های یوتیوب، مستندات و پروژه‌های عملی بوده است.
     </p>
 
@@ -1256,7 +1275,7 @@
                 <div class="contact-card">
                     <div class="icon">📱</div>
                     <div class="label">تلفن</div>
-                    <div class="value"><a href="tel:+98993.....20">0993......20</a></div>
+                    <div class="value"><a href="tel:+989938892920">09938892920</a></div>
                 </div>
                 
                 <div class="contact-card">
