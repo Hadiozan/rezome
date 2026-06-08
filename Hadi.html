@@ -4,355 +4,547 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>رزومه هادی اوزن</title>
-    <link rel="stylesheet" href="s.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* user-select: none; */
-        }
         :root {
-            --primary-color: #1e3c72; 
-            --primary-dark: #2c3e66;
-            --hover-color: #ffaa44;         
-            --white: #fbfbfb ;          
-            --multi-gradient: linear-gradient(45deg, rgb(47 30 114), rgb(63 255 0 / 80%)),
-                radial-gradient(circle at 20% 80%, rgba(93, 109, 255, 0), transparent 70%),
-                linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.02)),
-                linear-gradient(0deg, #00ff0a);
-            --navbar-bg: linear-gradient(90deg, #60606069, #162e75e0) , linear-gradient(#00000071 , #00000000);
-            /* --navbar-bg: linear-gradient(90deg , #1e3b72a2,#4169E1); */
+            --primary:       #1a2f5e;
+            --primary-mid:   #2a4a8e;
+            --accent:        #f5a623;
+            --accent-glow:   rgba(245,166,35,0.35);
+            --bg:            #0f1626;
+            --bg-card:       #162140;
+            --bg-card2:      #1c2b52;
+            --text:          #e8edf5;
+            --text-muted:    #8a9bbf;
+            --border:        rgba(255,255,255,0.07);
+            --glass:         rgba(255,255,255,0.04);
+            --shadow:        0 8px 32px rgba(0,0,0,0.4);
+            --radius:        20px;
+            --radius-sm:     12px;
         }
-        /* ---------------------------- */
-        /* هاله دور ناوبار هنگام هاور */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Vazirmatn', 'iransans', Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ─── پس‌زمینه متحرک ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(42,74,142,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(245,166,35,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(26,47,94,0.3) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── نوار ناوبری ─── */
         .navbar {
-            position: relative;
-            overflow: hidden;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(15, 22, 38, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 3rem;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            transition: padding 0.3s ease, background 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.6rem 3rem;
+            background: rgba(15, 22, 38, 0.95);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .desktop-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .desktop-menu li { position: relative; }
+
+        .desktop-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            padding: 4px 0;
+        }
+
+        .desktop-menu a:hover { color: var(--text); }
+
+        .desktop-menu li::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0%; height: 2px;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .desktop-menu li:hover::after { width: 100%; }
+
+        /* همبرگر */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 110;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: var(--text);
+            border-radius: 2px;
             transition: all 0.3s ease;
         }
 
-        .navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--x, 20%) var(--y, 20%), 
-                        rgba(255, 255, 255, 0.25) 0%, 
-                        rgba(255, 255, 255, 0.05) 20%, 
-                        rgba(255, 255, 255, 0) 40%,
-                        transparent 70%);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* منوی موبایل */
+        .mobile-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 270px; height: 100vh;
+            background: rgba(15, 22, 38, 0.97);
+            backdrop-filter: blur(24px);
+            z-index: 105;
+            transition: right 0.35s cubic-bezier(.4,0,.2,1);
+            padding-top: 90px;
+            border-left: 1px solid var(--border);
+        }
+
+        .mobile-menu.show { right: 0; }
+
+        .mobile-menu ul { list-style: none; }
+
+        .mobile-menu li { border-bottom: 1px solid var(--border); }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--text);
+            background: var(--glass);
+            padding-right: 2.5rem;
+        }
+
+        .overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 104;
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .overlay.show { opacity: 1; visibility: visible; }
+
+        /* ─── کانتینر ─── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
             z-index: 1;
         }
 
-        .navbar:hover::before {
-            opacity: 1;
-        }
-
-        /* حرکت هاله با موس داخل ناوبار */
-        .navbar {
-            cursor: default;
-        }
-
-   
-
-
-
-
-        .navbar {
-            background:var(--navbar-bg) ;
-            backdrop-filter: blur(15px) !important;
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            
-        }
-
-        body {
-            font-family: 'iransans','sahel','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #e7e7e7;
-        }
-
-/* ===== دکمه برگشت به بالا ===== */
-    .back-to-top {
-        position: fixed;
-        bottom: 50px;
-        right: 50px;   /* چون سایت راست‌چین است، در گوشه پایین چپ */
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        /* background: var(--primary-color, #1e3c72); */
-        background: radial-gradient(circle ,#000000  , #00000078 ,#00000000);
-        color: white;
-        border: none;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-    }
-
-    .back-to-top:hover {
-        background: var(--hover-color, #ffaa44);
-        transform: translateY(-5px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    }
-
-    .back-to-top.show {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* در موبایل کمی کوچک‌تر */
-    @media (max-width: 700px) {
-        .back-to-top {
-            width: 44px;
-            height: 44px;
-            font-size: 24px;
-            bottom: 15px;
-            right: 15px !important;
-            bottom:  15px !important;
-        }
-    }
-        .logo {
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.8rem;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
-        }
-
-        .nav-links a:hover {
-            border-bottom-color: var(--hover-color);
-            transform: translateY(-2px);
-        }
-
-        /* محتوای اصلی */
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-    
-
-        .container:hover section{
-            opacity: 0.7    ;
-        }
-        .container:hover section:hover{
-            opacity: 1;
-        }
-        
-  
+        /* ─── section پایه ─── */
         section {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 1.8rem;
             scroll-margin-top: 100px;
-            transition: ease-in-out 100ms;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ─── عنوان‌ها ─── */
         h2 {
-            color: var(--primary-color);
-            border-right: 5px solid var(--primary-color);
-            padding-right: 15px;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            color: var(--primary-dark);
-            margin: 1rem 0 0.5rem;
-        }
-
-        /* بخش تماس با من - استایل مخصوص */
-        .contact-info {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1.8rem;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        h3 { color: var(--text); font-size: 1.05rem; }
+
+        /* ─── بخش Hero / معرفی ─── */
+        #intro {
+            margin-top: 6rem;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card2) 100%);
+            border-color: rgba(42,74,142,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #intro::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(42,74,142,0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        #intro::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; right: -40px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(245,166,35,0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-name {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .intro-desc-block {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .intro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245,166,35,0.12);
+            border: 1px solid rgba(245,166,35,0.25);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 0.5rem;
+        }
+
+        .desc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 10px 14px;
+            background: var(--glass);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .desc-item strong { color: var(--text); }
+
+        .desc-item-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .feature-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .feature-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.2rem;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 0;
+            width: 3px; height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.25s ease;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .feature-card:hover { 
+            background: rgba(42,74,142,0.2);
+            border-color: rgba(42,74,142,0.5);
+            transform: translateX(-4px);
+        }
+
+        .feature-card:hover::before { transform: scaleY(1); }
+
+        .feature-emoji { font-size: 1.8rem; }
+        .feature-info { flex: 1; }
+
+        .feature-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .feature-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ─── بخش پروژه‌ها ─── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .contact-card {
-            flex: 1;
-            min-width: 200px;
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 0 15px 0 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 1px 2px 0.5px var(--primary-color);
-        }
-
-        .contact-card:hover body{
-            opacity: 0.5;
-        }
-
-
-        .contact-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-card .label {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-card .value {
-            color: #555;
-            direction: ltr;
-            display: inline-block;
-        }
-
-        .contact-card a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .contact-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* فرم تماس ساده */
-        .contact-form {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            /* border-top: 2px dashed #e0e0e0; */
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.3rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        .btn-submit {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-
-        .alert {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .alert.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-
-        /* ریسپانسیوتی */
-
-        .items p{
-            border-bottom: dashed;
-            padding-bottom: 25px;
-            border-color: #55555513;
-        }
-        .detail{
-            /* border-bottom: solid ;
-            border-width: 1px; */
-            color: #1c4fae !important;
-            cursor: pointer;
-            padding-block: 2px;
-        }
-        
-        .detail:hover{
-            color: #0066ff !important;
-        }
-
-
-        /* بخش آموزه‌ها و دوره‌ها */
-        .learning-card {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 1.2rem;
+        .project-card {
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-mid), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(42,74,142,0.5);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-card:hover::after { opacity: 1; }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .project-icon { font-size: 2.2rem; }
+
+        .project-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: rgba(42,74,142,0.3);
+            color: #7ba5e0;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(42,74,142,0.4);
+        }
+
+        .project-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .project-features li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-features li:last-child { border-bottom: none; }
+
+        .project-note {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background: rgba(245,166,35,0.07);
+            border: 1px solid rgba(245,166,35,0.15);
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+
+        .project-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 9px 18px;
+            border-radius: 40px;
+            font-size: 0.82rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+
+        .project-btn:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* تگ‌های مهارت */
+        .skills-summary {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .skill-pill {
+            background: rgba(42,74,142,0.2);
+            color: #7ba5e0;
+            border: 1px solid rgba(42,74,142,0.35);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: default;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .skill-pill:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* ─── بخش دوره‌ها ─── */
+        .learning-card {
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.25s ease;
         }
 
         .learning-card:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            border-color: var(--primary-color);
+            border-color: rgba(42,74,142,0.5);
+            transform: translateX(-4px);
         }
 
         .learning-header {
@@ -363,1038 +555,618 @@
             margin-bottom: 12px;
         }
 
-        .learning-icon {
-            font-size: 1.8rem;
-        }
+        .learning-icon { font-size: 1.6rem; }
 
         .learning-title {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #1e2a3e;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
             flex: 1;
         }
 
         .learning-hours {
-            background: var(--primary-color);
-            color: white;
-            padding: 4px 12px;
+            background: rgba(245,166,35,0.12);
+            color: var(--accent);
+            border: 1px solid rgba(245,166,35,0.25);
+            padding: 3px 12px;
             border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.78rem;
+            font-weight: 600;
         }
 
         .learning-details {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 7px;
             margin-bottom: 12px;
         }
 
         .level-badge {
-            background: #e2e8f0;
-            padding: 4px 12px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 3px 10px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            color: #1e2a3e;
-        }
-
-        .level-badge.beginner {
-            background: #fef3c7;
-            color: #b45309;
+            font-size: 0.72rem;
         }
 
         .learning-progress {
-            background: #e2e8f0;
+            background: rgba(255,255,255,0.06);
             border-radius: 20px;
-            height: 8px;
-            margin: 12px 0;
+            height: 6px;
+            margin: 10px 0;
             overflow: hidden;
         }
-        /* ===== بخش پروژه‌ها (گرید مدرن) ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid #eef2f6;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
-        }
-
-        .project-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 1rem;
-        }
-
-        .project-icon {
-            font-size: 2.5rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            margin: 0 0 5px 0;
-            color: var(--primary-color);
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .tag {
-            background: #eef2ff;
-            color: #1e3c72;
-            padding: 3px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        .project-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1rem 0;
-            flex: 1;
-        }
-
-        .project-features li {
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            color: #444;
-            line-height: 1.5;
-        }
-
-        .project-note {
-            font-size: 0.75rem;
-            color: #888;
-            background: #f8f9fa;
-            padding: 8px 10px;
-            border-radius: 12px;
-            margin: 10px 0;
-        }
-
-        .project-btn {
-            background: #1e293b;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 10px;
-            width: fit-content;
-            border-right: 1px solid black;
-        }
-
-        .project-btn:hover {
-            background: var(--primary-color);
-            transform: scale(1.02); 
-            /* transform: matrix(100px); */
-        }
-
-        .skills-summary {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 2px dashed #e0e0e0;
-        }
-
-        .skill-pill {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .skill-pill:hover {
-            transform: scale(1.05);
-            background: #ffaa44;
-            color: #1e3c72;
-        }
-
 
         .progress-bar {
-            background: linear-gradient(90deg, #4f8edc45);
+            background: linear-gradient(90deg, var(--primary-mid), var(--accent));
             height: 100%;
             border-radius: 20px;
-            width: 0% ;
-            transition: width 0.5s ease-in-out;
-
+            width: 0%;
+            transition: width 1s cubic-bezier(.4,0,.2,1);
         }
 
         .learning-note {
             font-size: 0.8rem;
-            color: #555;
-            margin-top: 8px;
+            color: var(--text-muted);
         }
 
         .total-note {
-            background: #eef2ff;
-            padding: 12px 20px;
-            border-radius: 15px;
+            background: rgba(42,74,142,0.15);
+            border: 1px solid rgba(42,74,142,0.3);
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
             text-align: center;
-            margin-top: 20px;
+            margin-top: 1.5rem;
             font-size: 0.9rem;
-            color: #1e3c72;
+            color: var(--text);
         }
 
-        .learning-card:hover .progress-bar{
-            background: linear-gradient(90deg, var(--primary-color), #4f8fdc);
-            transition: 1s ease;
+        /* ─── بخش تماس ─── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
-
-        /* برای اینکه محتوای نوار زیر هاله قرار نگیرد (اختیاری) */
-        /* ---------------------------------------------- */
-        /* ---------------------------------------------- */
-        /* ---------------------------------------------- */
-        /* ---------------------------------------------- */
-        /* دکمه همبرگری - فقط در موبایل */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;  /* changed from space-between */
-    gap: 6px;                 /* اضافه شد - فاصله بین خطوط */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    z-index: 110;
-    position: absolute;
-    right: 5%;
-}
-
-.hamburger .bar {
-    width: 65%;
-    height: 3px;
-    background-color: white;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* تبدیل به ضربدر - با ارتفاع 40px و gap 6px */
-.hamburger.active .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-}
-
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-    transform: scale(0);
-}
-
-.hamburger.active .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-}
-        /* منوی دسکتاپ */
-        .desktop-menu {
-            display: flex;
-            gap: 1.8rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .contact-card {
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.3rem;
+            text-align: center;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .desktop-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .desktop-menu a:hover {
-            border-bottom-color: #ffaa44;
-            transform: translateY(-2px);
-        }
-
-        /* منوی موبایل - مخفی در حالت عادی */
-        .mobile-menu {
-            display: none;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background: transparent;
+        .contact-card::before {
+            content: '';
             position: absolute;
-            top: 70px;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            flex-direction: column;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            transition: 1s ease-in-out;
-
+            bottom: 0; right: 0;
+            width: 60px; height: 60px;
+            background: radial-gradient(circle, rgba(42,74,142,0.3), transparent);
+            border-radius: 50%;
+            transition: all 0.4s;
         }
 
-        .mobile-menu li {
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            background: linear-gradient(90deg , #0000003d , #000000b9);
-            backdrop-filter: blur(5px);
+        .contact-card:hover {
+            border-color: rgba(42,74,142,0.5);
+            transform: translateY(-4px);
         }
 
-        .mobile-menu li:last-child {
-            border-bottom: none;
-            border-radius: 0 0 15px 15px;
+        .contact-card:hover::before {
+            width: 200px; height: 200px;
         }
 
-        .mobile-menu a {
-            display: block;
-            padding: 1rem;
-            color: white;
+        .contact-card .icon { font-size: 2rem; margin-bottom: 8px; }
+
+        .contact-card .label {
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-card .value { font-size: 0.85rem; }
+
+        .contact-card a {
+            color: var(--accent);
             text-decoration: none;
-            text-align: center;
+            direction: ltr;
+            display: inline-block;
+            transition: color 0.2s;
         }
 
-        .mobile-menu a:hover {
-            background-color: rgba(255,255,255,0.1);
-            backdrop-filter: blur(12px);
-        }
+        .contact-card a:hover { color: #fff; }
 
-        /* نمایش منوی موبایل وقتی کلاس show دارد */
-        .mobile-menu.show {
+        /* ─── دکمه برگشت ─── */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: var(--primary-mid);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
             display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-/* ----------------------------------------------------------------------- */
-/* ---------------------------  بخش معرفی ----------------------------------- */
-/* ----------------------------------------------------------------------- */
-
-/* ===== بخش معرفی (بازطراحی) ===== */
-.intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-
-}
-
-.intro-text {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.intro-badge {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    display: inline-block;
-    padding: 6px 18px;
-    border-radius: 40px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    width: fit-content;
-}
-
-.intro-desc {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.intro-desc strong {
-    color: var(--primary-color);
-}
-
-.intro-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.feature-card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 1rem 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    border: 1px solid #eef2f6;
-    transition: all 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateX(-5px);
-    border-color: var(--primary-color);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.feature-emoji {
-    font-size: 2rem;
-}
-
-.feature-title {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #1e2a3e;
-    min-width: 100px;
-}
-
-.feature-desc {
-    font-size: 0.8rem;
-    color: #5a6e8a;
-}
-
-.intro-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 0.5rem;
-    padding-top : 1rem;
-    border-top: 1px solid #e2e8f0;
-}
-
-.intro-skills span {
-    background: #eef2ff;
-    color: #1e3c72;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-.intro-skills span:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: scale(1.02);
-}
-
-/* ریسپانسیو */
-@media (max-width: 750px) {
-    .intro-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .feature-card {
-        padding: 0.8rem 1rem;
-    }
-    
-    .feature-emoji {
-        font-size: 1.6rem;
-    }
-    
-    .feature-title {
-        min-width: auto;
-        font-size: 0.9rem;
-    }
-    
-    .feature-desc {
-        font-size: 0.7rem;
-    }
-}
-
-
-
-
-
-        
-/* ---------------------------------------- */
-/* ------------------ریسپانسو---------------------- */
-/* ---------------------------------------- */
-
-
-
-
-        /* ===== موبایل ===== */
-        @media (max-width: 700px) {
-            .navbar::before {
-                width: 0%;
-                height: 0%;
-            }
-            .mobile-menu.show {
-                display: flex !important;
-                position: sticky;
-            }
-            .hamburger {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-links {
-                display: none;
-                position: sticky;
-            }
-            
-            .navbar {
-                position: sticky;
-            }
+        .back-to-top:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+            transform: translateY(-3px);
         }
 
-        /* ===== دسکتاپ ===== */
-        @media (min-width: 701px) {
-            .mobile-menu {
-                display: none !important;
-            }
-            
-            .nav-links {
-                display: flex;
-            }
-        }
-        /* _______________________________________________ */
-        /* _______________________________________________ */
-        /* _______________________________________________ */
+        .back-to-top.show { opacity: 1; visibility: visible; }
 
-        @media (max-width: 700px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .project-card {
-                padding: 1.2rem;
-            }
-            .progress-bar {
-                background: linear-gradient(90deg, var(--primary-color), #4f8fdc);
-            }
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.8rem;
-                padding: 1rem;
-            }
-            .nav-links {
-                gap: 1rem;
-                justify-content: center;
-                
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-            section {
-                padding: 1.2rem;
-            }
-            .contact-info {
-                flex-direction: column;
-            }
-            #experience div{
-                padding-bottom: 10px;
-                border-color: #55555513;
-            }
-            .experience li , 
-            .experience span{
-                margin-top:10px ;
-                /* margin-left: 10px; */
-            }
-            .detail{
-                padding-inline: 10px;
-                border-radius: 10px ;
-                background-color: #33333323;
-            }
-        .container:hover section{
-            opacity: 1 !important    ;
-        }
-        .container:hover section:hover{
-            opacity: 1;
-        }
+        /* ─── انیمیشن ورود ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* استایل چاپ */
+        .fade-in {
+            animation: fadeUp 0.6s ease both;
+        }
+
+        /* ─── ریسپانسیو ─── */
+        @media (max-width: 768px) {
+            .navbar { padding: 0.8rem 1.2rem; }
+            .navbar.scrolled { padding: 0.5rem 1.2rem; }
+            .desktop-menu { display: none; }
+            .hamburger { display: flex; }
+            .container { padding: 0 1rem; }
+            #intro { margin-top: 5rem; }
+            .intro-grid { grid-template-columns: 1fr; }
+            section { padding: 1.5rem; }
+            .hero-name { font-size: 2rem; }
+            .back-to-top { bottom: 1rem; right: 1rem; }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu, .overlay { display: none !important; }
+        }
+
         @media print {
-            .navbar {
-                position: static;
-                background-color: #eee !important;
-                color: black;
-            }
-            .logo, .nav-links a {
-                color: black;
-            }
-            .contact-form {
-                display: none;
-            }
-            body {
-                background: var(--white);
-            }
-            section {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-            
-        }
-        .intro-text2{
-            background: var(--primary-color);
-            border-inline: 60px transparent solid;
-            text-align: center;
-            border-radius: 12px;
-            width: auto;
-            padding: 6px 0px;
+            .navbar, .back-to-top, .overlay { display: none; }
+            body { background: white; color: black; }
+            section { box-shadow: none; border: 1px solid #ccc; }
         }
 
-        .container section:hover{
-            /* -ms-transform-origin-x:100px ; */
-            scale: 1.005;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        /* ─── subtext ─── */
+        .section-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            margin-top: -1rem;
+        }
+
+        /* ─── تجربه‌ها ─── */
+        .exp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .exp-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem 1.3rem;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .exp-item:hover {
+            border-color: rgba(42,74,142,0.5);
+            color: var(--text);
+            transform: translateX(-4px);
+        }
+
+        .exp-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--accent-glow);
         }
     </style>
 </head>
 <body>
 
-    <!--  هدر اصلی  -->
-    <div class="navbar">
+    <!-- ناوبار -->
+    <nav class="navbar" id="navbar">
         <div class="logo">هادی اوزن</div>
-        <button class="hamburger" id="hamburgerBtn">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+        <button class="hamburger" id="hamburgerBtn" aria-label="منو">
+            <span></span><span></span><span></span>
         </button>
-    <ul class="nav-links">
-        <li><a href="#intro">معرفی</a></li>
-        <li><a href="#experience">سابقه شغلی</a></li>
-        <li><a href="#learning">مدارک تحصیلی</a></li>
-        <li><a href="#projects">تجربه‌ها</a></li>
-        <li><a href="#contact">تماس با من</a></li>
-    </ul>
+        <ul class="desktop-menu">
+            <li><a href="#intro">معرفی</a></li>
+            <li><a href="#experience">پروژه‌ها</a></li>
+            <li><a href="#learning">آموزش‌ها</a></li>
+            <li><a href="#projects">تجربه‌ها</a></li>
+            <li><a href="#contact">تماس</a></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#intro">معرفی</a></li>
+            <li><a href="#experience">پروژه‌ها</a></li>
+            <li><a href="#learning">آموزش‌ها</a></li>
+            <li><a href="#projects">تجربه‌ها</a></li>
+            <li><a href="#contact">تماس</a></li>
+        </ul>
     </div>
-
-    <!-- منوی موبایل (جدا از navbar) -->
-     
-    <ul class="mobile-menu" id="mobileMenu">
-        <li><a href="#intro">معرفی</a></li>
-        <li><a href="#experience">سابقه شغلی</a></li>
-        <li><a href="#learning">مدارک تحصیلی</a></li>
-        <li><a href="#projects">تجربه‌ها</a></li>
-        <li><a href="#contact">تماس با من</a></li>
-    </ul>
-
-    <!-- منوی دسکتاپ (همون قبلی) -->
-
 
     <div class="container">
-        <!--  معرفی -->
-    <section id="intro">
-    <h2 id="say-hi">👋 سلام ، من هادی هستم</h2>
-        
-        <div class="intro-grid">
-            <!-- سمت راست: معرفی کوتاه -->
-            <div class="intro-text">
-                <p class="intro-badge">✨ توسعه‌دهنده فرانت‌اند (Junior) |  سه سال یادگیری مداوم   </p>
-                <p class="intro-desc" style="margin-bottom: 0px;border-bottom: #0000005b dashed 1px; padding-bottom:6px ;">
-                <strong>:)</strong> پایه فنی قوی در <strong>HTML، CSS، JavaScript</strong> و آشنایی عمیق با 
-                    <strong>Tailwind، Sass، Flexbox و Grid</strong>. 
-                </p>
-                <p style="color: black; border-bottom: #0000005b dashed 1px; padding-bottom:9px ;"> <strong>:)</strong>  با توانایی تولید و توسعه  <strong>اپ دسکتاپ </strong>با <strong>Python و Tkinter</strong></p>
-                <p class="intro-desc">
-                <strong >:)</strong> آماده برای <strong>کارآموزی یا موقعیت Junior Frontend Developer</strong>
-                    با روحیه تیمی عالی و سرعت یادگیری بالا.
-                </p>
-            </div>
 
-            <!-- سمت چپ: سه ویژگی کلیدی به صورت کارت -->
-            <div class="intro-features">
-                <div class="feature-card">
-                    <span class="feature-emoji">💡</span>
-                    <span class="feature-title">روحیه تیمی قوی</span>
-                    <span class="feature-desc">همکاری مؤثر و تعامل حرفه‌ای</span>
+        <!-- ─── معرفی ─── -->
+        <section id="intro" class="fade-in">
+            <div class="hero-name">هادی اوزن</div>
+            <p class="hero-title">توسعه‌دهنده <span>فرانت‌اند</span> · سه سال یادگیری مداوم و خودآموز</p>
+
+            <div class="intro-grid">
+                <div class="intro-desc-block">
+                    <span class="intro-badge">✨ Junior Frontend Developer</span>
+
+                    <div class="desc-item">
+                        <span class="desc-item-icon">🎨</span>
+                        <span>پایه فنی قوی در <strong>HTML، CSS، JavaScript</strong> و آشنایی عمیق با <strong>Tailwind، Sass، Flexbox و Grid</strong></span>
+                    </div>
+                    <div class="desc-item">
+                        <span class="desc-item-icon">🖥️</span>
+                        <span>توانایی تولید و توسعه <strong>اپ دسکتاپ</strong> با <strong>Python و Tkinter</strong></span>
+                    </div>
+                    <div class="desc-item">
+                        <span class="desc-item-icon">🤝</span>
+                        <span>آماده برای <strong>کارآموزی</strong> با روحیه تیمی عالی و سرعت یادگیری بالا</span>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-emoji">🚀</span>
-                    <span class="feature-title">یادگیری سریع</span>
-                    <span class="feature-desc">تسلط بر تکنولوژی‌های جدید در کمترین زمان</span>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-emoji">🎯</span>
-                    <span class="feature-title">تمرکز بر جزئیات</span>
-                    <span class="feature-desc">طراحی تمیز و تجربه کاربری روان</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-
-        <!--  سابقه شغلی -->
-        <!-- ===== بخش پروژه‌ها و تجربیات عملی (بازطراحی) ===== -->
-<section id="experience">
-    <h2>🚀 پروژه‌ها و تجربیات عملی</h2>
-    <p style="margin-bottom: 1.8rem; color: #555;">مرور سریع مهم‌ترین کارهایی که انجام دادم</p>
-
-    <div class="projects-grid">
-        
-        <!-- پروژه ۱: سیستم مدیریت دانش‌آموزان -->
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-icon">📘</span>
-                <div>
-                    <h3 class="project-title">سیستم مدیریت دانش‌آموزان</h3>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Tkinter</span>
-                        <span class="tag">Desktop App</span>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <span class="feature-emoji">💡</span>
+                        <div class="feature-info">
+                            <div class="feature-title">روحیه تیمی قوی</div>
+                            <div class="feature-desc">همکاری مؤثر و تعامل حرفه‌ای در محیط تیمی</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-emoji">🚀</span>
+                        <div class="feature-info">
+                            <div class="feature-title">یادگیری سریع</div>
+                            <div class="feature-desc">تسلط بر تکنولوژی‌های جدید در کمترین زمان</div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-emoji">🎯</span>
+                        <div class="feature-info">
+                            <div class="feature-title">تمرکز بر جزئیات</div>
+                            <div class="feature-desc">طراحی تمیز و تجربه کاربری روان و دقیق</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <ul class="project-features">
-                <li>✅ طراحی صفحات لاگین، ثبت‌نام و پنل مدیریت</li>
-                <li>✅ پنل دبیر و دانش‌آموز + بازیابی رمز</li>
-                <li>✅ تمرکز بر تجربه کاربری ساده و ساختار ماژولار</li>
-            </ul>
-            <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
-        </div>
-
-        <!-- پروژه ۲: منوی دیجیتال رستوران -->
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-icon">🍽️</span>
-                <div>
-                    <h3 class="project-title">منوی دیجیتال رستوران</h3>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">Responsive</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="project-features">
-                <li>✅ طراحی صفحه ساده، تمیز و ریسپانسیو</li>
-                <li>✅ چیدمان حرفه‌ای منو با اولویت‌بندی اطلاعات</li>
-                <li>✅ تمرین عملی Flexbox و طراحی بدون فریمورک</li>
-            </ul>
-            <div class="box">
-                <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
-            </div>
-        </div>
-
-        <!-- پروژه ۳: همکاری گروهی فرانت‌اند -->
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-icon">👥</span>
-                <div>
-                    <h3 class="project-title">همکاری گروهی – فرانت‌اند</h3>
-                    <div class="project-tags">
-                        <span class="tag">HTML/CSS</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">Team Work</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="project-features">
-                <li>✅ نقش توسعه‌دهنده گرافیک و فرانت‌اند در ۲ پروژه تیمی</li>
-                <li>✅ حل چالش‌های ریسپانسیو در نمایشگرهای خاص</li>
-                <li>✅ توانایی کار تیمی و تعامل مؤثر</li>
-            </ul>
-            <p class="project-note">📌 پروژه به دلیل محدودیت‌های تیمی به پایان نرسید اما توانایی فنی اثبات شد.</p>
-            <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
-        </div>
-    </div>
-
-    <!-- جمع‌بندی مهارت‌ها -->
-    <div class="skills-summary" style="user-select: none;">
-        <span class="skill-pill">HTML5</span>
-        <span class="skill-pill">CSS3</span>
-        <span class="skill-pill">JavaScript</span>
-        <span class="skill-pill">Tailwind</span>
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">Tkinter</span>
-        <span class="skill-pill">Responsive Design</span>
-        <span class="skill-pill">Team Work</span>
-    </div>
-</section>
-
-
-        <!--  مدارک تحصیلی -->
-<!-- ===== بخش آموزه‌ها و دوره‌ها ===== -->
-<section id="learning">
-    <h2>📚 آموزه‌ها و دوره‌ها</h2>
-    <p style="margin-bottom: 1.5rem; color: #555;">
-        تمام آموزش‌ها به صورت <strong>خودآموز</strong> و ترکیبی از فیلم‌های یوتیوب، مستندات و پروژه‌های عملی بوده است.
-    </p>
-
-    <!-- پایتون -->
-    <div class="learning-card">
-        <div class="learning-header">
-            <span class="learning-icon">🐍</span>
-            <span class="learning-title">Python</span>
-            <span class="learning-hours">۱۰۰ ساعت</span>
-        </div>
-        <div class="learning-details">
-            <span class="level-badge beginner">متوسط</span>
-            <span class="level-badge">Tkinter</span>
-            <span class="level-badge">Webview</span>
-            <span class="level-badge">Django (مقدماتی)</span>
-        </div>
-        <div class="learning-progress">
-            <div class="progress-bar" style="width: 85%;"></div>
-        </div>
-        <p class="learning-note">✅ پروژه عملی: سیستم مدیریت دانش‌آموزان (اپلیکیشن دسکتاپ)</p>
-    </div>
-
-    <!-- JavaScript -->
-    <div class="learning-card">
-        <div class="learning-header">
-            <span class="learning-icon">💛</span>
-            <span class="learning-title">JavaScript</span>
-            <span class="learning-hours">۴۵ ساعت</span>
-        </div>
-        <div class="learning-details">
-            <span class="level-badge beginner">متوسط رو به پایین</span>
-            <span class="level-badge">ES6+</span>
-            <span class="level-badge">DOM</span>
-            <span class="level-badge">رویدادها</span>
-        </div>
-        <div class="learning-progress">
-            <div class="progress-bar" style="width: 60%;"></div>
-        </div>
-        <p class="learning-note">📌 در حال یادگیری فعال و ساخت پروژه‌های تعاملی</p>
-    </div>
-
-    <!-- HTML & CSS -->
-    <div class="learning-card">
-        <div class="learning-header">
-            <span class="learning-icon">🎨</span>
-            <span class="learning-title">HTML & CSS</span>
-            <span class="learning-hours">۳۰ ساعت</span>
-        </div>
-        <div class="learning-details">
-            <span class="level-badge beginner">خوب</span>
-            <span class="level-badge">ساختاردهی</span>
-            <span class="level-badge">ریسپانسیو</span>
-            <span class="level-badge">فرم‌ها</span>
-        </div>
-        <div class="learning-progress">
-            <div class="progress-bar" style="width: 80%;"></div>
-        </div>
-        <p class="learning-note">✅ طراحی چندین پروژه شخصی و همین رزومه تعاملی</p>
-    </div>
-
-    <!-- Sass, Tailwind, Flexbox, Grid -->
-    <div class="learning-card">
-        <div class="learning-header" >
-            <span class="learning-icon">⚡</span>
-            <span class="learning-title">Sass · Tailwind · Flexbox · Grid</span><br>
-            <span class="learning-hours">۵۰ ساعت</span>
-        </div>
-        <div class="learning-details">
-            <span class="level-badge beginner">خوب</span>
-            <span class="level-badge">Sass</span>
-            <span class="level-badge">Tailwind</span>
-            <span class="level-badge">Flex/Grid</span>
-        </div>
-        <div class="learning-progress">
-            <div class="progress-bar" style="width: 75%;"></div>
-        </div>
-        <p class="learning-note">🎯 علاقه خاص به طراحی مدرن و چیدمان‌های پیچیده</p>
-    </div>
-
-    <!-- گیت و گیت‌هاب -->
-    <div class="learning-card">
-        <div class="learning-header">
-            <span class="learning-icon">📦</span>
-            <span class="learning-title">Git & GitHub</span>
-            <span class="learning-hours">۵ ساعت</span>
-        </div>
-        <div class="learning-details">
-            <span class="level-badge beginner">مقدماتی</span>
-            <span class="level-badge">clone</span>
-            <span class="level-badge">commit</span>
-            <span class="level-badge">push</span>
-        </div>
-        <div class="learning-progress">
-            <div class="progress-bar" style="width: 30%;"></div>
-        </div>
-        <p class="learning-note">📚 در حال یادگیری برای همکاری تیمی حرفه‌ای</p>
-    </div>
-
-    <div class="total-note">
-        ⏱️ <strong>مجموع ساعت‌های آموزش و تمرین:</strong> حدود ۲۳۰ ساعت (خودآموز و پروژه‌محور)
-    </div>
-</section>  
-
-        <!-- بخش تجربه‌ها -->
-        <section id="projects">
-            <h2>تجربه‌ها</h2>
-            <ul>
-                <li>طراحی رزومه تعاملی با HTML, CSS</li>
-                <li>ساخت یک داشبورد مدیریت ساده با React</li>
-                <li>بهبود سرعت بارگذاری یک وبسایت فروشگاهی</li>
-            </ul>
         </section>
 
-        <!-- ===== بخش تماس با من (جدید) ===== -->
+        <!-- ─── پروژه‌ها و تجربیات عملی ─── -->
+        <section id="experience">
+            <h2>🚀 پروژه‌ها و تجربیات عملی</h2>
+            <p class="section-sub">مرور مهم‌ترین کارهایی که انجام دادم</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">📘</span>
+                        <div>
+                            <h3 class="project-title">سیستم مدیریت دانش‌آموزان</h3>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Tkinter</span>
+                                <span class="tag">Desktop App</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="project-features">
+                        <li>✅ طراحی صفحات لاگین، ثبت‌نام و پنل مدیریت</li>
+                        <li>✅ پنل دبیر و دانش‌آموز + بازیابی رمز</li>
+                        <li>✅ تمرکز بر تجربه کاربری ساده و ساختار ماژولار</li>
+                    </ul>
+                    <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">🍽️</span>
+                        <div>
+                            <h3 class="project-title">منوی دیجیتال رستوران</h3>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">Responsive</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="project-features">
+                        <li>✅ طراحی صفحه ساده، تمیز و ریسپانسیو</li>
+                        <li>✅ چیدمان حرفه‌ای منو با اولویت‌بندی اطلاعات</li>
+                        <li>✅ تمرین عملی Flexbox و طراحی بدون فریمورک</li>
+                    </ul>
+                    <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">👥</span>
+                        <div>
+                            <h3 class="project-title">همکاری گروهی – فرانت‌اند</h3>
+                            <div class="project-tags">
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">JS</span>
+                                <span class="tag">Team Work</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="project-features">
+                        <li>✅ نقش توسعه‌دهنده گرافیک و فرانت‌اند در ۲ پروژه تیمی</li>
+                        <li>✅ حل چالش‌های ریسپانسیو در نمایشگرهای خاص</li>
+                        <li>✅ توانایی کار تیمی و تعامل مؤثر</li>
+                    </ul>
+                    <p class="project-note">📌 پروژه به دلیل محدودیت‌های تیمی به پایان نرسید، اما توانایی فنی اثبات شد.</p>
+                    <button class="project-btn">📸 نمایش عکس‌های پروژه</button>
+                </div>
+            </div>
+
+            <div class="skills-summary">
+                <span class="skill-pill">HTML5</span>
+                <span class="skill-pill">CSS3</span>
+                <span class="skill-pill">JavaScript</span>
+                <span class="skill-pill">Tailwind</span>
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">Tkinter</span>
+                <span class="skill-pill">Responsive Design</span>
+                <span class="skill-pill">Team Work</span>
+            </div>
+        </section>
+
+        <!-- ─── آموزش‌ها ─── -->
+        <section id="learning">
+            <h2>📚 آموزه‌ها و دوره‌ها</h2>
+            <p class="section-sub">تمام آموزش‌ها به صورت <strong style="color:var(--text)">خودآموز</strong> و ترکیبی از یوتیوب، مستندات و پروژه‌های عملی</p>
+
+            <div class="learning-card">
+                <div class="learning-header">
+                    <span class="learning-icon">🐍</span>
+                    <span class="learning-title">Python</span>
+                    <span class="learning-hours">۱۰۰ ساعت</span>
+                </div>
+                <div class="learning-details">
+                    <span class="level-badge">متوسط</span>
+                    <span class="level-badge">Tkinter</span>
+                    <span class="level-badge">Webview</span>
+                    <span class="level-badge">Django مقدماتی</span>
+                </div>
+                <div class="learning-progress"><div class="progress-bar" data-width="85"></div></div>
+                <p class="learning-note">✅ پروژه عملی: سیستم مدیریت دانش‌آموزان (اپلیکیشن دسکتاپ)</p>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-header">
+                    <span class="learning-icon">💛</span>
+                    <span class="learning-title">JavaScript</span>
+                    <span class="learning-hours">۴۵ ساعت</span>
+                </div>
+                <div class="learning-details">
+                    <span class="level-badge">متوسط رو به پایین</span>
+                    <span class="level-badge">ES6+</span>
+                    <span class="level-badge">DOM</span>
+                    <span class="level-badge">رویدادها</span>
+                </div>
+                <div class="learning-progress"><div class="progress-bar" data-width="60"></div></div>
+                <p class="learning-note">📌 در حال یادگیری فعال و ساخت پروژه‌های تعاملی</p>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-header">
+                    <span class="learning-icon">🎨</span>
+                    <span class="learning-title">HTML & CSS</span>
+                    <span class="learning-hours">۳۰ ساعت</span>
+                </div>
+                <div class="learning-details">
+                    <span class="level-badge">خوب</span>
+                    <span class="level-badge">ساختاردهی</span>
+                    <span class="level-badge">ریسپانسیو</span>
+                    <span class="level-badge">فرم‌ها</span>
+                </div>
+                <div class="learning-progress"><div class="progress-bar" data-width="80"></div></div>
+                <p class="learning-note">✅ طراحی چندین پروژه شخصی و همین رزومه تعاملی</p>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-header">
+                    <span class="learning-icon">⚡</span>
+                    <span class="learning-title">Sass · Tailwind · Flexbox · Grid</span>
+                    <span class="learning-hours">۵۰ ساعت</span>
+                </div>
+                <div class="learning-details">
+                    <span class="level-badge">خوب</span>
+                    <span class="level-badge">Sass</span>
+                    <span class="level-badge">Tailwind</span>
+                    <span class="level-badge">Flex/Grid</span>
+                </div>
+                <div class="learning-progress"><div class="progress-bar" data-width="75"></div></div>
+                <p class="learning-note">🎯 علاقه خاص به طراحی مدرن و چیدمان‌های پیچیده</p>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-header">
+                    <span class="learning-icon">📦</span>
+                    <span class="learning-title">Git & GitHub</span>
+                    <span class="learning-hours">۵ ساعت</span>
+                </div>
+                <div class="learning-details">
+                    <span class="level-badge">مقدماتی</span>
+                    <span class="level-badge">clone</span>
+                    <span class="level-badge">commit</span>
+                    <span class="level-badge">push</span>
+                </div>
+                <div class="learning-progress"><div class="progress-bar" data-width="30"></div></div>
+                <p class="learning-note">📚 در حال یادگیری برای همکاری تیمی حرفه‌ای</p>
+            </div>
+
+            <div class="total-note">
+                ⏱️ <strong>مجموع ساعت‌های آموزش و تمرین:</strong> حدود ۲۳۰ ساعت — خودآموز و پروژه‌محور
+            </div>
+        </section>
+
+        <!-- ─── تجربه‌ها (تمیز شده) ─── -->
+        <section id="projects">
+            <h2>💼 تجربه‌های دیگر</h2>
+            <div class="exp-list">
+                <div class="exp-item">
+                    <span class="exp-dot"></span>
+                    طراحی این رزومه تعاملی با HTML، CSS و JavaScript خالص
+                </div>
+                <div class="exp-item">
+                    <span class="exp-dot"></span>
+                    ساخت یک داشبورد مدیریت ساده با React (در حال یادگیری)
+                </div>
+                <div class="exp-item">
+                    <span class="exp-dot"></span>
+                    بهبود سرعت بارگذاری و بهینه‌سازی یک وبسایت فروشگاهی
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── تماس ─── -->
         <section id="contact">
-            <h2>تماس با من</h2>
-            
-            <div class="contact-info">
+            <h2>📬 تماس با من</h2>
+            <div class="contact-grid">
                 <div class="contact-card">
                     <div class="icon">📧</div>
                     <div class="label">ایمیل</div>
                     <div class="value"><a href="mailto:hadiozan130@gmail.com">hadiozan130@gmail.com</a></div>
                 </div>
-                
                 <div class="contact-card">
                     <div class="icon">📱</div>
                     <div class="label">تلفن</div>
-                    <div class="value"><a href="tel:+98993.....20">0993......20</a></div>
+                    <div class="value"><a href="tel:+989938892920">09938892920</a></div>
                 </div>
-                
                 <div class="contact-card">
                     <div class="icon">🪪</div>
-                    <div class="label">مشاهده رزومه متداول</div>
-                    <div class="value"><a href="https://my.files.ir/drive/s/9yTeutKgbbd98oUuRlG5rY8AItDnbT" target="_blank">https://my.file...</a></div>
+                    <div class="label">رزومه متداول</div>
+                    <div class="value"><a href="https://my.files.ir/drive/s/9yTeutKgbbd98oUuRlG5rY8AItDnbT" target="_blank">مشاهده فایل</a></div>
                 </div>
-                
                 <div class="contact-card">
                     <div class="icon">🐙</div>
                     <div class="label">گیت‌هاب</div>
-                    <div class="value"><a href="#" target="_blank">github.com/hadiozan</a></div>
+                    <div class="value"><a href="https://github.com/hadiozan" target="_blank">github.com/hadiozan</a></div>
                 </div>
             </div>
         </section>
-        
+
     </div>
-<!-- دکمه برگشت به بالا -->
-<button id="backToTop" class="back-to-top" aria-label="برگشت به بالا">
-    ↑
-</button>
 
+    <button id="backToTop" class="back-to-top" aria-label="برگشت به بالا">↑</button>
 
-</body>
+    <script>
+        // ─── ناوبار ───
+        const navbar      = document.getElementById('navbar');
+        const hamburgerBtn= document.getElementById('hamburgerBtn');
+        const mobileMenu  = document.getElementById('mobileMenu');
+        const overlay     = document.getElementById('overlay');
+        const backToTopBtn= document.getElementById('backToTop');
 
-
-<script>
-
-    const say_hi = document.querySelector('.intro-badge')
-    
-
-    const max_w = window.matchMedia("(max-width: 460px)");
-
-
-
-    function go(e){
-        if (e.matches){
-            say_hi.innerHTML=('✨ توسعه‌دهنده فرانت‌اند Junior <br>🎓  سه سال یادگیری مداوم  ')
-            say_hi.classList.toggle('intro-text2')
-            
-        }else{
-        say_hi.innerHTML=('✨ توسعه‌دهنده فرانت‌اند Junior |  سه سال یادگیری مداوم  ')         
-        say_hi.classList.remove('intro-text2')    
-      }
-    } 
-
-
-
-    max_w.addEventListener('change' , go);
-
-    go(max_w);
-
-
-    // -----------------------------------------------
-    // منوی همبرگری - با انیمیشن ضربدر
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    // وقتی دکمه کلیک شد
-    if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            // تغییر کلاس active برای انیمیشن ضربدر
-            hamburgerBtn.classList.toggle('active');
-            // باز و بسته کردن منو
-            mobileMenu.classList.toggle('show');
+        window.addEventListener('scroll', () => {
+            const s = window.scrollY;
+            navbar.classList.toggle('scrolled', s > 50);
+            backToTopBtn.classList.toggle('show', s > 300);
         });
 
-        // وقتی روی هر لینکی در منوی موبایل کلیک شد، منو بسته شود و دکمه به حالت اول برگردد
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('show');
-                hamburgerBtn.classList.remove('active');
-            });
-        });
-        
-        // با کلیک بیرون منو، بسته شود
-        document.addEventListener('click', function(event) {
-            const isClickInsideMenu = mobileMenu.contains(event.target);
-            const isClickOnBtn = hamburgerBtn.contains(event.target);
-            
-            if (!isClickInsideMenu && !isClickOnBtn && mobileMenu.classList.contains('show')) {
-                mobileMenu.classList.remove('show');
-                hamburgerBtn.classList.remove('active');
-            }
-        });
-    }
+        function openMenu() {
+            hamburgerBtn.classList.add('active');
+            mobileMenu.classList.add('show');
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
 
-    // اسکرول نرم
-    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if(targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-                // بستن منو موبایل اگر باز بود
-                if (mobileMenu.classList.contains('show')) {
-                    mobileMenu.classList.remove('show');
-                    if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+        function closeMenu() {
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('show');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', () =>
+            mobileMenu.classList.contains('show') ? closeMenu() : openMenu()
+        );
+
+        overlay.addEventListener('click', closeMenu);
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', e => {
+                const hash = link.getAttribute('href');
+                if (hash && hash !== '#') {
+                    e.preventDefault();
+                    document.getElementById(hash.substring(1))?.scrollIntoView({ behavior: 'smooth' });
                 }
-            }
-        });
-    });
-
-    // هاله متحرک روی ناوبار
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        navbar.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            this.style.setProperty('--x', x + '%');
-            this.style.setProperty('--y', y + '%');
-        });
-    }
-    // دکمه برگشت به بالا
-    const backToTopBtn = document.getElementById('backToTop');
-
-    if (backToTopBtn) {
-        // نمایش یا مخفی کردن دکمه بر اساس اسکرول
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-
-        // رفتن به بالا با کلیک
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+                closeMenu();
             });
         });
-    }
-</script>
 
+        document.querySelectorAll('.desktop-menu a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.getElementById(a.getAttribute('href').substring(1))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ─── progress bar با IntersectionObserver ───
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                        bar.style.width = (bar.dataset.width || 0) + '%';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.learning-card').forEach(card => observer.observe(card));
+
+        // ─── fade-in برای section‌ها ───
+        const fadeObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section:not(#intro)').forEach(sec => {
+            sec.style.opacity = '0';
+            sec.style.transform = 'translateY(20px)';
+            sec.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            fadeObserver.observe(sec);
+        });
+    </script>
+</body>
 </html>
