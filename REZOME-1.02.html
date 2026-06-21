@@ -643,11 +643,15 @@
         .contact-card::before {
             content: '';
             position: absolute;
-            bottom: 0; right: 0;
-            width: 60px; height: 60px;
-            background: radial-gradient(circle, rgba(42,74,142,0.3), transparent);
-            border-radius: 50%;
-            transition: all 0.4s;
+            top: -50px;
+            right: -50px;        
+            width: 0;
+            height: 0%;
+            background-color: var(--bg);
+            backdrop-filter:blur(-1px);
+            transition:  0.5s ease-in-out;
+            border-radius: 0px 0px 0 100px;
+            z-index: -1;
         }
 
         .contact-card:hover {
@@ -656,7 +660,7 @@
         }
 
         .contact-card:hover::before {
-            width: 200px; height: 200px;
+            width: 150%; height: 200%;
         }
 
         .contact-card .icon { font-size: 2rem; margin-bottom: 8px; }
@@ -1170,3 +1174,4 @@
     </script>
 </body>
 </html>
+
